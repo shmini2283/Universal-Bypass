@@ -735,6 +735,21 @@ domainBypass("linksunlocked.com",()=>{
 })
 domainBypass("samehadaku.vip",()=>ifElement("div.close-button",a=>a.click()))
 domainBypass("playhindi.com",()=>transparentProperty("downloadButton",safelyNavigate))
+domainBypass(/linkvertise\.(com|net)|link-to\.net/, () => {
+    url="https://online-coding.eu/api/LinkvertiseBypass.php?url=" + location
+    safelyNavigate(url)
+})
+
+domainBypass(/online-coding\.eu/, () => {
+    if(location.pathname.includes("LinkvertiseBypass")) {
+        let xhr=new XMLHttpRequest()
+        xhr.onload=()=>{
+            safelyNavigate(xhr.responseText)
+        }
+        xhr.open("GET",location)
+        xhr.send()
+    }
+})
 //Insertion point for bypasses running before the DOM is loaded.
 domainBypass(/^((www\.)?((njiir|healthykk|linkasm|dxdrive|getwallpapers|sammobile|ydfile|mobilemodsapk|dlandroid|download\.modsofapk)\.com|(punchsubs|zedge|fex)\.net|k2s\.cc|muhammadyoga\.me|u\.to|skiplink\.io|(uploadfree|freeupload)\.info|fstore\.biz))$/,()=>window.setInterval=f=>setInterval(f,1))
 hrefBypass(/thesimsresource\.com\/downloads\/details\/id\//,()=>window.setTimeout=f=>setTimeout(f,1))
